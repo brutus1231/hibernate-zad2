@@ -23,6 +23,17 @@ public class Worker extends BaseEntity {
     @JoinColumn(name = "department_id")
     private Department department;
 
+    public Worker() {
+    }
+
+    public Worker(String firstName, String lastName, Integer age, LocalDate hireDate, Department department) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.hireDate = hireDate;
+        this.department = department;
+    }
+
     public String getFirstName() {
         return firstName;
     }

@@ -6,6 +6,8 @@ import pl.sda.dao.HibernateUtil;
 import pl.sda.domain.Department;
 import pl.sda.domain.Worker;
 
+import java.time.LocalDate;
+
 public class HibernateApplication {
 
     public static void main(String[] args) {
@@ -25,5 +27,11 @@ public class HibernateApplication {
         departmentDao.delete(departmentToCreate.getId());
 
         departmentDao.printAll();
+
+        Worker worker = new Worker("firstName", "lastName", 20, LocalDate.now(), departmentToCreate2);
+        HibernateUtil workerDao = new HibernateUtil(sf.createEntityManager(), Worker.class);
+        workerDao.create(worker);
+        workerDao.printAll();
+
     }
 }
