@@ -7,6 +7,7 @@ import pl.sda.domain.Department;
 import pl.sda.domain.Worker;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
 public class HibernateApplication {
 
@@ -18,6 +19,7 @@ public class HibernateApplication {
                         .buildSessionFactory();
 
         HibernateUtil departmentDao = new HibernateUtil(sf.createEntityManager(), Department.class);
+        HibernateUtil workerDao = new HibernateUtil(sf.createEntityManager(), Worker.class);
 
         Department departmentToCreate = new Department("Dział HR");
         departmentDao.create(departmentToCreate);
@@ -29,9 +31,10 @@ public class HibernateApplication {
         departmentDao.printAll();
 
         Worker worker = new Worker("firstName", "lastName", 20, LocalDate.now(), departmentToCreate2);
-        HibernateUtil workerDao = new HibernateUtil(sf.createEntityManager(), Worker.class);
+
         workerDao.create(worker);
         workerDao.printAll();
+        System.out.println(worker.getId());
 
     }
 }

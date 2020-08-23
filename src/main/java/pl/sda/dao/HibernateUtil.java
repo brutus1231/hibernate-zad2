@@ -1,21 +1,25 @@
 package pl.sda.dao;
 
+import org.hibernate.Session;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class HibernateUtil {
 
-    private final EntityManager entityManager;
+    //private final EntityManager entityManager;
+    private final Session session;
     private final Class clazz;
 
     public HibernateUtil(EntityManager entityManager, Class clazz) {
-        this.entityManager = entityManager;
+        //this.entityManager = entityManager;
+        this.session = entityManager.unwrap(Session.class);
         this.clazz = clazz;
     }
 
     public List<Object> findAll() {
-        return entityManager.createQuery("From " + clazz.getName(), clazz).getResultList();
+        return session.createQuery("From " + clazz.getName(), clazz).getResultList();
     }
 
     public void printAll() {
@@ -29,11 +33,11 @@ public class HibernateUtil {
     public void create(Object objectToCreate) {
         EntityTransaction transaction = null;
         try {
-            transaction = entityManager.getTransaction();
+            transaction = session.getTransaction();
             if (!transaction.isActive()) {
                 transaction.begin();
             }
-            entityManager.persist(objectToCreate);
+            session.persist(objectToCreate);
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
@@ -45,11 +49,11 @@ public class HibernateUtil {
     public void delete(Long id) {
         EntityTransaction transaction = null;
         try {
-            transaction = entityManager.getTransaction();
+            transaction = session.getTransaction();
             if (!transaction.isActive()) {
                 transaction.begin();
             }
-            entityManager.remove(entityManager.find(clazz, id));
+            session.remove(session.find(clazz, id));
             transaction.commit();
         } catch (Exception ex) {
             if (transaction != null) {
