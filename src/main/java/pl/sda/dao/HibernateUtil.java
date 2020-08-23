@@ -61,4 +61,8 @@ public class HibernateUtil {
             }
         }
     }
+
+    public void close() {
+        session.close();
+    }
 }

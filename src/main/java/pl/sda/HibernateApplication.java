@@ -36,5 +36,9 @@ public class HibernateApplication {
         workerDao.printAll();
         System.out.println(worker.getId());
 
+        departmentDao.close();
+        workerDao.close();
+        sf.close();
+
     }
 }
