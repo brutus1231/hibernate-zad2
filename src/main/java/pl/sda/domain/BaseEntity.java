@@ -3,6 +3,7 @@ package pl.sda.domain;
 import javax.persistence.*;
 
 @MappedSuperclass
+@NamedQuery(name = "findById", query = "from Department where id = ?1")
 public class BaseEntity {
 
     @Id

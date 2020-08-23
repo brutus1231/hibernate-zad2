@@ -1,6 +1,7 @@
 package pl.sda.dao;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,6 +21,12 @@ public class HibernateUtil {
 
     public List<Object> findAll() {
         return session.createQuery("From " + clazz.getName(), clazz).getResultList();
+    }
+
+    public Object findById(Long id) {
+        Query query = session.createNamedQuery("findById", clazz);
+        query.setParameter(1, id);
+        return query.getSingleResult();
     }
 
     public void printAll() {
