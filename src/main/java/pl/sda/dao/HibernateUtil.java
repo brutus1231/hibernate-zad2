@@ -1,7 +1,5 @@
 package pl.sda.dao;
 
-import pl.sda.domain.Department;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import java.util.List;
@@ -16,15 +14,15 @@ public class HibernateUtil {
         this.clazz = clazz;
     }
 
-    public List<Department> findAll() {
+    public List<Object> findAll() {
         return entityManager.createQuery("From " + clazz.getName(), clazz).getResultList();
     }
 
     public void printAll() {
         System.out.println("Dane z tabeli: ");
-        List<Department> departments = findAll();
-        for (Department department : departments) {
-            System.out.println(department);
+        List<Object> entities = findAll();
+        for (Object entity : entities) {
+            System.out.println(entity);
         }
     }
 
