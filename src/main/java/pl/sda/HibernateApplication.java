@@ -6,8 +6,6 @@ import pl.sda.dao.DepartmentDaoImpl;
 import pl.sda.domain.Department;
 import pl.sda.domain.Worker;
 
-import java.util.List;
-
 public class HibernateApplication {
 
     public static void main(String[] args) {
@@ -18,9 +16,10 @@ public class HibernateApplication {
                         .buildSessionFactory();
 
         DepartmentDaoImpl departmentDao = new DepartmentDaoImpl(sf.createEntityManager());
-        List<Department> departments = departmentDao.findAll();
-        for (Department department : departments) {
-            System.out.println("Departament " + department.getId() + " name " + department.getName());
-        }
+
+        Department departmentToCreate = new Department("Dział HR");
+        departmentDao.create(departmentToCreate);
+
+        departmentDao.printAll();
     }
 }
