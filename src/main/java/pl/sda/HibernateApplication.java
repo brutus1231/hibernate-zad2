@@ -2,7 +2,7 @@ package pl.sda;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import pl.sda.dao.DepartmentDaoImpl;
+import pl.sda.dao.HibernateUtil;
 import pl.sda.domain.Department;
 import pl.sda.domain.Worker;
 
@@ -15,10 +15,14 @@ public class HibernateApplication {
                         .addAnnotatedClass(Worker.class)
                         .buildSessionFactory();
 
-        DepartmentDaoImpl departmentDao = new DepartmentDaoImpl(sf.createEntityManager());
+        HibernateUtil departmentDao = new HibernateUtil(sf.createEntityManager(), Department.class);
 
         Department departmentToCreate = new Department("Dział HR");
         departmentDao.create(departmentToCreate);
+        Department departmentToCreate2 = new Department("Departament IT");
+        departmentDao.create(departmentToCreate2);
+
+        departmentDao.delete(departmentToCreate.getId());
 
         departmentDao.printAll();
     }

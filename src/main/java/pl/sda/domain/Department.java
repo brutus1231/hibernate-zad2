@@ -4,12 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "DEPARTMENT")
-public class Department {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column
-    private Long id;
+public class Department extends BaseEntity {
 
     @Column(length = 200, nullable = false)
     private String name;
@@ -19,14 +14,6 @@ public class Department {
 
     public Department(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -39,6 +26,6 @@ public class Department {
 
     @Override
     public String toString() {
-        return "Department{" + "id=" + id + ", name='" + name + '\'' + '}';
+        return "Department{" + "id=" + getId() + ", name='" + name + '\'' + '}';
     }
 }

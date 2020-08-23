@@ -5,12 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "WORKER")
-public class Worker {
-
-    @Id
-    @GeneratedValue
-    @Column
-    private Long id;
+public class Worker extends BaseEntity {
 
     @Column(name = "first_name", length = 100, nullable = false)
     private String firstName;
@@ -27,14 +22,6 @@ public class Worker {
     @ManyToOne
     @JoinColumn(name = "department_id")
     private Department department;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -66,5 +53,11 @@ public class Worker {
 
     public void setHireDate(LocalDate hireDate) {
         this.hireDate = hireDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Worker{" + "id=" + getId() + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", " +
+                "age=" + age + ", hireDate=" + hireDate + ", department=" + department + '}';
     }
 }
