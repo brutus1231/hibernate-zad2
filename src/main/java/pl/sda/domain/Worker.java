@@ -1,6 +1,8 @@
 package pl.sda.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Entity
@@ -14,6 +16,8 @@ public class Worker extends BaseEntity {
     private String lastName;
 
     @Column
+    @Min(0)
+    @Max(150)
     private Integer age;
 
     @Column(name = "hire_date")
